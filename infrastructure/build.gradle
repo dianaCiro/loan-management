@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+group = 'com.meli.loan'
+version = '0.0.1'
+sourceCompatibility = '11'
+
+dependencies {
+
+    implementation project.ext.springdata
+
+    compile project.ext.springbootweb
+    
+    compileOnly project.ext.lombok
+    annotationProcessor project.ext.lombok
+
+    implementation project(':domain')
+}
