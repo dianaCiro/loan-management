@@ -16,4 +16,9 @@ dependencies {
 	compile project.ext.modelmapper
 	compile project.ext.h2
     implementation project(':domain')
+
+    testCompile project.ext.junit4
+    testCompile project.ext.springboottest
+
+    testCompile project(path: ':domain', configuration: 'tests')
 }

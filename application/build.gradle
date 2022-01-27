@@ -21,4 +21,7 @@ dependencies {
 	implementation project.ext.javaxxlm
 	
 	implementation project.ext.springdata
+	
+	testCompile project(path: ':domain', configuration: 'tests')
+
 }

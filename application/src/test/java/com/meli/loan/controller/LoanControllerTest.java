@@ -1,7 +1,8 @@
 package com.meli.loan.controller;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Optional;
 
@@ -10,11 +11,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.WebApplicationContext;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.loan.LoanApplication;
 import com.meli.loan.entity.LoanEntity;
 import com.meli.loan.jpa.JpaLoanRepository;
@@ -27,28 +33,39 @@ import com.meli.loan.testdatabuilder.CreateLoanParamsTestDataBuilder;
 @Transactional
 public class LoanControllerTest {
 
+	private MockMvc mockMvc;
+
 	@Autowired
-	private LoanController loanController;
-	
+	private WebApplicationContext context;
+
 	@Autowired
 	private JpaLoanRepository jpaLoanRepository;
-	
+
+	@Autowired
+	private ObjectMapper objectMapper;
+
 	private CreateLoanParamsTestDataBuilder createLoanParamsBuilder;
-	
+
 	@Before
 	public void setUp() {
 		createLoanParamsBuilder = new CreateLoanParamsTestDataBuilder();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
 
 	@Test
-	public void createLoanApplication() {
+	public void createLoanApplication() throws JsonProcessingException, Exception {
 		CreateLoanParams createLoanParams = createLoanParamsBuilder.build();
-		
-		ResponseEntity<LoanResource> loanResource = loanController.createLoanApplication(createLoanParams);
-	
-		Optional<LoanEntity> optionalLoan = jpaLoanRepository.findById(loanResource.getBody().getLoanId());
-		
+
+		ResultActions result = mockMvc.perform(post("/loan").contentType(MediaType.APPLICATION_JSON)
+				.content(this.objectMapper.writeValueAsString(createLoanParams)));
+
+		result.andExpect(status().isOk());
+
+		LoanResource loanResource = this.objectMapper.readValue(result.andReturn().getResponse().getContentAsString(),
+				LoanResource.class);
+
+		Optional<LoanEntity> optionalLoan = jpaLoanRepository.findById(loanResource.getLoanId());
+
 		assertTrue(optionalLoan.isPresent());
-		assertEquals(HttpStatus.OK, loanResource.getStatusCode());
 	}
 }

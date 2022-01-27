@@ -12,12 +12,12 @@ import com.meli.loan.model.Loan;
  *
  */
 @Component
-public class loanMapperEntity {
+public class LoanMapperEntity {
 
 	private ModelMapper modelMapper;
 	
-	public loanMapperEntity() {
-		this.modelMapper = new ModelMapper();
+	public LoanMapperEntity(ModelMapper modelMapper) {
+		this.modelMapper = modelMapper;
 	}
 
 	/**
