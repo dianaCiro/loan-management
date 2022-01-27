@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+group = 'com.meli.loan'
+version = '0.0.1'
+sourceCompatibility = '11'
+
+
+dependencies {
+
+	compile project.ext.jackson
+	compileOnly project.ext.lombok
+    annotationProcessor project.ext.lombok
+	implementation project.ext.springdata
+	testCompile project.ext.junit4
+	testCompile project.ext.springboottest
+}
+
+task testJar(type: Jar) {
+	classifier 'test'
+	from sourceSets.test.output
+}
+
+configurations {
+	tests
+}
+
+artifacts {
+	tests testJar
+}
