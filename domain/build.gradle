@@ -7,4 +7,8 @@ sourceCompatibility = '11'
 
 dependencies {
 
+	compile project.ext.jackson
+	compileOnly project.ext.lombok
+    annotationProcessor project.ext.lombok
+	implementation project.ext.springdata
 }

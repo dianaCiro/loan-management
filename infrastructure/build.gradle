@@ -13,5 +13,7 @@ dependencies {
     compileOnly project.ext.lombok
     annotationProcessor project.ext.lombok
 
+	compile project.ext.modelmapper
+	compile project.ext.h2
     implementation project(':domain')
 }
