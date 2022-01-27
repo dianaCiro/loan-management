@@ -1,0 +1,15 @@
+# Compiled class file
+*.class
+
+### STS ###
+.classpath
+.factorypath
+.project
+.settings
+
+#gradle
+.gradle
+/build*
+!gradle/wrapper/gradle-wrapper.jar
+
+/dist/
