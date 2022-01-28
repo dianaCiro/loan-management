@@ -8,6 +8,7 @@ import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The entity loan class.
@@ -18,6 +19,7 @@ import lombok.Data;
 @Entity(name = "loan")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class LoanEntity {
 	
 	/**
