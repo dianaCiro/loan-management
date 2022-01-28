@@ -120,4 +120,5 @@ public class Loan {
 		double installment = (monthlyRate + monthlyRate / ( Math.pow((1+ monthlyRate) , this.term) - 1)) * this.amount;
 		return Math.round(installment*100)/100.0;
 	}
+
 }

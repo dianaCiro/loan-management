@@ -1,0 +1,1 @@
+web: java -jar build/libs/loan-management-1.0-SNAPSHOT-plain.jar
