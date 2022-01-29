@@ -11,8 +11,10 @@ dependencies {
 	compileOnly project.ext.lombok
     annotationProcessor project.ext.lombok
 	implementation project.ext.springdata
+	implementation project.ext.javaxvalidation
 	testCompile project.ext.junit4
 	testCompile project.ext.springboottest
+
 }
 
 task testJar(type: Jar) {

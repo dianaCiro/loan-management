@@ -55,11 +55,23 @@ public class Loan {
 	 * @param date
 	 */
 	public Loan(double amount, double rate, int term, LocalDateTime date) {
+		this(UUID.randomUUID().toString(), amount, rate, term, date);
+	}
+
+	/**
+	 * The constructor.
+	 * @param id
+	 * @param amount
+	 * @param rate
+	 * @param term
+	 * @param date
+	 */
+	public Loan(String id, double amount, double rate, int term, LocalDateTime date){
 		this.setAmount(amount);
 		this.setRate(rate);
 		this.setTerm(term);
 		this.setDate(date);
-		this.id = UUID.randomUUID().toString();
+		this.id = id;
 	}
 
 	/**
@@ -120,4 +132,9 @@ public class Loan {
 		double installment = (monthlyRate + monthlyRate / ( Math.pow((1+ monthlyRate) , this.term) - 1)) * this.amount;
 		return Math.round(installment*100)/100.0;
 	}
+
+	/**
+	 * constructor used to build object in mapper.
+	 */
+	private Loan(){}
 }
