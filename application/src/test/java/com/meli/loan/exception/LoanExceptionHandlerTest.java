@@ -1,6 +1,7 @@
 package com.meli.loan.exception;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -23,13 +24,18 @@ import com.meli.loan.model.CreateLoanParams;
 import com.meli.loan.response.ResponseError;
 import com.meli.loan.testdatabuilder.CreateLoanParamsTestDataBuilder;
 
+import javax.persistence.EntityManager;
+
 @RunWith(SpringRunner.class)
 @WebMvcTest(LoanController.class)
 public class LoanExceptionHandlerTest {
 
 	@MockBean
 	private JpaLoanRepository jpaLoanRepository;
-	
+
+	@MockBean
+	private EntityManager entityManager;
+
 	@Autowired
 	private MockMvc mockMvc;
 	
@@ -81,6 +87,25 @@ public class LoanExceptionHandlerTest {
 		 
 		 assertEquals("Internal server error", error.getMessage());
 		 
+	}
+
+	@Test
+	public void manageConstraintViolationException() throws Exception {
+		CreateLoanParams createLoanParams = createLoanParamsTestDataBuilder.build();
+
+		Mockito.when(jpaLoanRepository.save(Mockito.any())).thenThrow(new RuntimeException());
+
+		String url = "/loan?page=ASDF&limit=2&sortColumn=date&sortDirection=ASC";
+
+		ResultActions result = mockMvc.perform(get(url).contentType(MediaType.APPLICATION_JSON));
+
+		result.andExpect(status().isUnprocessableEntity());
+
+		ResponseError error = this.objectMapper.readValue(
+				result.andReturn().getResponse().getContentAsString(), ResponseError.class);
+
+		assertEquals("Only numbers and positive numbers are allowed", error.getMessage());
+
 	}
 	
 }

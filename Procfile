@@ -1,1 +1,1 @@
-web: java -jar build/libs/loan-management-1.0-SNAPSHOT-plain.jar
+web: java -jar application/build/libs/application-0.0.1.jar

@@ -1,0 +1,65 @@
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+group 'com.meli.loan'
+version '1.0-SNAPSHOT'
+
+allprojects {
+
+    repositories {
+        mavenCentral()
+    }
+
+    project.ext.junit4 = ["junit:junit:4.12"]
+    project.ext.mockito = ['org.mockito:mockito-all:1.10.19']
+
+    project.ext.springboottest = ["org.springframework.boot:spring-boot-starter-test:${springBootVersion}"]
+    project.ext.springbootweb = ["org.springframework.boot:spring-boot-starter-web:${springBootVersion}"]
+    project.ext.springTransaction = ["org.springframework:org.springframework.transaction:${springBootVersion}"]
+        
+    project.ext.h2 = ["com.h2database:h2:1.4.194"]
+    project.ext.javaxxlm = ['javax.xml.bind:jaxb-api:2.2.12']
+
+    
+    project.ext.springdata = ["org.springframework.boot:spring-boot-starter-data-jpa:2.6.3"]
+    
+    project.ext.lombok = ["org.projectlombok:lombok:1.18.10"]
+	
+	project.ext.modelmapper = ['org.modelmapper:modelmapper:3.0.0']
+	
+	project.ext.jackson = ['com.fasterxml.jackson.core:jackson-databind:2.0.1']
+
+    project.ext.javaxvalidation = ['javax.validation:validation-api:2.0.1.Final']
+}
+
+buildscript {
+	ext {
+        springBootVersion = '2.6.2'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath(
+            "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        )
+    }
+}
+
+dependencies {
+    configurations {
+        runtime.exclude module: 'spring-boot-starter-tomcat'
+        compile.exclude module: 'spring-boot-starter-tomcat'
+    }
+
+    compile project.ext.springbootweb
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bootJar {
+    enabled = false
+}

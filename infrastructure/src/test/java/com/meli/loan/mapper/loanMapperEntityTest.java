@@ -22,9 +22,6 @@ public class loanMapperEntityTest {
     @InjectMocks
     private LoanMapperEntity loanMapperEntity;
 
-    @Mock
-    private ModelMapper modelMapper;
-
     @Before
     public void setUp(){
         MockitoAnnotations.openMocks(this);
@@ -35,24 +32,25 @@ public class loanMapperEntityTest {
     @Test
     public void convertEntityToDomainObject(){
         LoanEntity loanEntity = loanEntityTestDataBuilder.build();
-        Loan loan = loanTestDataBuilder.build();
-
-        Mockito.when(modelMapper.map(loanEntity, Loan.class)).thenReturn(loan);
-
         Loan loanResponse = loanMapperEntity.convertEntityToDomainObject(loanEntity);
 
-        assertEquals(loan, loanResponse);
+        assertEquals(loanEntity.getId(), loanResponse.getId());
+        assertEquals(loanEntity.getAmount(), loanResponse.getAmount(), 0.0);
+        assertEquals(loanEntity.getTerm(), loanResponse.getTerm());
+        assertEquals(loanEntity.getRate(), loanResponse.getRate(), 0.0);
+        assertEquals(loanEntity.getTerm(), loanResponse.getTerm());
     }
 
     @Test
     public void convertDomainToEntityObject(){
-        LoanEntity loanEntity = loanEntityTestDataBuilder.build();
         Loan loan = loanTestDataBuilder.build();
-
-        Mockito.when(modelMapper.map(loan, LoanEntity.class)).thenReturn(loanEntity);
 
         LoanEntity loanEntityResponse = loanMapperEntity.convertDomainToEntityObject(loan);
 
-        assertEquals(loanEntity, loanEntityResponse);
+        assertEquals(loan.getId(), loanEntityResponse.getId());
+        assertEquals(loan.getAmount(), loanEntityResponse.getAmount(), 0.0);
+        assertEquals(loan.getTerm(), loanEntityResponse.getTerm());
+        assertEquals(loan.getRate(), loanEntityResponse.getRate(), 0.0);
+        assertEquals(loan.getTerm(), loanEntityResponse.getTerm());
     }
 }

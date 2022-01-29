@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+
+		<Console name="console">
+			<PatternLayout pattern="%d [%p] %c %m%n" />
+		</Console>
+
+        <Async name="AsyncConsole">
+            <AppenderRef ref="console" />
+        </Async>
+        
+	</Appenders>
+
+	<Loggers>
+
+		<Root level="INFO">
+			<AppenderRef ref="AsyncConsole" />
+		</Root>
+
+	</Loggers>
+
+</Configuration>
