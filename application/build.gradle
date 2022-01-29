@@ -22,7 +22,10 @@ dependencies {
 	implementation project.ext.javaxxlm
 	
 	implementation project.ext.springdata
-	
+
+	implementation project.ext.javaxvalidation
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.2'
+
 	testCompile project(path: ':domain', configuration: 'tests')
 
 }

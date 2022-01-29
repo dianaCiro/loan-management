@@ -9,6 +9,8 @@ import com.meli.loan.response.ResponseError;
 
 import lombok.extern.slf4j.Slf4j;
 
+import javax.validation.ConstraintViolationException;
+
 /**
  * This class is used to handle exceptions.
  * @author diana.ciro
@@ -23,7 +25,7 @@ public class LoanExceptionHandler {
 	/**
 	 * Handles Business exceptions.
 	 * @param businessException is the exception to handle.
-	 * @return ResponseEntity<ResponseError> instance with a custom error. 
+	 * @return ResponseEntity<ResponseError> instance with a custom error.
 	 */
 	@ExceptionHandler(BusinessException.class)
 	public ResponseEntity<ResponseError> manageBusinessExceptionHandler(BusinessException businessException){
@@ -31,15 +33,28 @@ public class LoanExceptionHandler {
 		ResponseError response = new ResponseError(HttpStatus.UNPROCESSABLE_ENTITY.value(), businessException.getMessage());
 		return new ResponseEntity<>(response, HttpStatus.UNPROCESSABLE_ENTITY);
 	}
-	
+
+	/**
+	 * Handles ConstraintViolationException.
+	 * @param constraintViolationException is the exception to handle.
+	 * @return ResponseEntity<ResponseError> instance with a custom error.
+	 */
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<ResponseError> manageConstraintViolationException(ConstraintViolationException constraintViolationException){
+		log.warn(constraintViolationException.getMessage());
+		ResponseError response = new ResponseError(HttpStatus.UNPROCESSABLE_ENTITY.value(), constraintViolationException.getConstraintViolations().iterator().next().getMessage());
+		return new ResponseEntity<>(response, HttpStatus.UNPROCESSABLE_ENTITY);
+	}
+
 	/**
 	 * Handles general exceptions.
 	 * @param throwable  is the exception to handle.
-	 * @return ResponseEntity<ResponseError> instance with a custom error. . 
+	 * @return ResponseEntity<ResponseError> instance with a custom error. .
 	 */
 	@ExceptionHandler(Throwable.class)
 	public ResponseEntity<ResponseError> manageGeneralException(Throwable throwable) {
 		log.error(TROWABLE_EXCEPTION, throwable.getMessage());
+		System.err.println(throwable.getMessage());
 		ResponseError response = new ResponseError(HttpStatus.INTERNAL_SERVER_ERROR.value(), TROWABLE_EXCEPTION);
 		return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 	}

@@ -29,6 +29,7 @@ allprojects {
 	
 	project.ext.jackson = ['com.fasterxml.jackson.core:jackson-databind:2.0.1']
 
+    project.ext.javaxvalidation = ['javax.validation:validation-api:2.0.1.Final']
 }
 
 buildscript {

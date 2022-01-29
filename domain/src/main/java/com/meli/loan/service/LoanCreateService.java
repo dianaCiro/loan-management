@@ -2,6 +2,8 @@ package com.meli.loan.service;
 
 import com.meli.loan.model.CreateLoanParams;
 import com.meli.loan.model.Loan;
+import com.meli.loan.model.LoanFilter;
+import com.meli.loan.model.PagedLoan;
 import com.meli.loan.repository.LoanRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,4 +43,13 @@ public class LoanCreateService {
 		loanRepository.create(loan);
 		return loan;
 	}
+
+	/**
+	 * Retrieves loans with pagination.
+	 * @param loanFilter instance.
+	 * @return PagedLoan instance.
+	 */
+    public PagedLoan retrieveLoans(LoanFilter loanFilter) {
+		return loanRepository.retrieveLoans(loanFilter);
+    }
 }
