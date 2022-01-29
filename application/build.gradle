@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
 
 group = 'com.meli.loan'
 version = '0.0.1'
@@ -27,4 +28,11 @@ dependencies {
 
 	testCompile project(path: ':domain', configuration: 'tests')
 
+}
+
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'Loan-Management',
+				'Main-Class': 'com.meli.LoanApplication'
+	}
 }
