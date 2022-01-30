@@ -4,10 +4,10 @@ import com.meli.loan.model.Loan;
 import com.meli.loan.model.LoanFilter;
 import com.meli.loan.model.PagedLoan;
 
+import java.util.Optional;
+
 /**
  * LoanRepository interface.
- * @author diana.ciro
- *
  */
 public interface LoanRepository {
 
@@ -23,4 +23,11 @@ public interface LoanRepository {
 	 * @return PagedLoan instance.
 	 */
     PagedLoan retrieveLoans(LoanFilter loanFilter);
+
+	/**
+	 * Retrieves an optional.
+	 * @param loanId to find the optional
+	 * @return Optional<Loan> instance.
+	 */
+    Optional<Loan> findById(String loanId);
 }

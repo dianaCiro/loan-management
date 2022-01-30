@@ -10,9 +10,6 @@ import lombok.Getter;
 
 /**
  * This class contains the loan information.
- * 
- * @author diana.ciro
- *
  */
 @Getter
 public class Loan {

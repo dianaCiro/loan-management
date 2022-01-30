@@ -6,9 +6,7 @@ import com.meli.loan.entity.LoanEntity;
 import com.meli.loan.model.Loan;
 
 /**
- * Mapper to convert entity and domain objects.
- * @author diana.ciro
- *
+ * Mapper to convert loan entity and domain objects.
  */
 @Component
 public class LoanMapperEntity {

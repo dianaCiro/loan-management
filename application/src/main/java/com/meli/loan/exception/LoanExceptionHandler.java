@@ -47,6 +47,18 @@ public class LoanExceptionHandler {
 	}
 
 	/**
+	 * Handles NotFoundException.
+	 * @param notFoundException is the exception to handle.
+	 * @return ResponseEntity<ResponseError> instance with a custom error.
+	 */
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<ResponseError> manageNotFoundException(NotFoundException notFoundException){
+		log.warn(notFoundException.getMessage());
+		ResponseError response = new ResponseError(HttpStatus.NOT_FOUND.value(), notFoundException.getMessage());
+		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	}
+
+	/**
 	 * Handles general exceptions.
 	 * @param throwable  is the exception to handle.
 	 * @return ResponseEntity<ResponseError> instance with a custom error. .

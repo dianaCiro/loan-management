@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Contains data to create a loan
- * @author diana.ciro
- *
+ * Contains the data to create a loan.
  */
 @Data
 @Setter

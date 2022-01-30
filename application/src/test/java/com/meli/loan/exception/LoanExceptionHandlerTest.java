@@ -5,6 +5,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.meli.loan.jpa.JpaPaymentRepository;
+import com.meli.loan.testdatabuilder.CreatePaymentParamsTestDataBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +27,8 @@ import com.meli.loan.response.ResponseError;
 import com.meli.loan.testdatabuilder.CreateLoanParamsTestDataBuilder;
 
 import javax.persistence.EntityManager;
+import java.text.MessageFormat;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(LoanController.class)
@@ -32,6 +36,9 @@ public class LoanExceptionHandlerTest {
 
 	@MockBean
 	private JpaLoanRepository jpaLoanRepository;
+
+	@MockBean
+	private JpaPaymentRepository jpaPaymentRepository;
 
 	@MockBean
 	private EntityManager entityManager;
@@ -71,9 +78,9 @@ public class LoanExceptionHandlerTest {
 	@Test
 	public void manageGeneralException() throws Exception {
 		 CreateLoanParams createLoanParams = createLoanParamsTestDataBuilder.build();
-		
+
 		 Mockito.when(jpaLoanRepository.save(Mockito.any())).thenThrow(new RuntimeException());
-		 
+
 		 ResultActions result = mockMvc.perform(
 			 post("/loan")
 			 .contentType(MediaType.APPLICATION_JSON)
@@ -107,5 +114,26 @@ public class LoanExceptionHandlerTest {
 		assertEquals("Only numbers and positive numbers are allowed", error.getMessage());
 
 	}
-	
+
+	@Test
+	public void manageNotFoundException() throws Exception {
+
+		String loanId = "90e4dd94-e042-4d55-8473-7f8f27ca67";
+		String url = MessageFormat.format("/loan/{0}/payment", loanId);
+		CreatePaymentParamsTestDataBuilder createPaymentParamsTestDataBuilder = new CreatePaymentParamsTestDataBuilder();
+
+		ResultActions result = mockMvc.perform(
+				post(url)
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(this.objectMapper.writeValueAsString(createPaymentParamsTestDataBuilder.build()))
+		);
+
+		result.andExpect(status().isNotFound());
+
+		ResponseError error = this.objectMapper.readValue(
+				result.andReturn().getResponse().getContentAsString(), ResponseError.class);
+
+		assertEquals(MessageFormat.format("The entered loan {0} does not exist", loanId), error.getMessage());
+
+	}
 }
