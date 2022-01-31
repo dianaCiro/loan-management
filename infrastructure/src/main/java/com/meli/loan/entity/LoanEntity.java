@@ -28,25 +28,25 @@ public class LoanEntity {
 	/**
 	 * Loan amount.
 	 */
-	@Column
+	@Column(nullable = false)
 	private double amount;
 	
 	/**
 	 * Number of months it will take until the loan is paid off.
 	 */
-	@Column
+	@Column(nullable = false)
 	private int term;
 	
 	/**
 	 * Loan rate.
 	 */
-	@Column
+	@Column(nullable = false)
 	private double rate;
 	
 	/**
 	 * Date when the loan was requested
 	 */
-	@Column
+	@Column(nullable = false)
 	private LocalDateTime date;
 
 	/**

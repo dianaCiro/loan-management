@@ -1,10 +1,7 @@
 package com.meli.loan.model;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * Contains the data to paginate.

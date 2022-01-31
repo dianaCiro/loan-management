@@ -1,6 +1,5 @@
 package com.meli.loan.model;
 
-import com.meli.loan.enums.PaymentType;
 import com.meli.loan.exception.BusinessException;
 import com.meli.loan.testdatabuilder.PaymentTestDataBuilder;
 import org.junit.Before;

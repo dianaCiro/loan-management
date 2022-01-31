@@ -1,7 +1,5 @@
 package com.meli.loan.enums;
 
-import com.meli.loan.model.Payment;
-
 import java.util.Optional;
 
 public enum PaymentType {

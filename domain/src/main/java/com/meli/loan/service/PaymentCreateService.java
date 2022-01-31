@@ -26,6 +26,8 @@ public class PaymentCreateService {
      */
     private LoanRepository loanRepository;
 
+    public static final String LOAN_NOT_EXISTING = "The entered loan {0} does not exist";
+
     /**
      * PaymentCreateService constructor.
      * @param paymentRepository
@@ -54,7 +56,7 @@ public class PaymentCreateService {
             );
             return paymentRepository.create(payment);
         } else {
-            throw new NotFoundException(MessageFormat.format("The entered loan {0} does not exist", loanId));
+            throw new NotFoundException(MessageFormat.format(LOAN_NOT_EXISTING, loanId));
         }
     }
 }

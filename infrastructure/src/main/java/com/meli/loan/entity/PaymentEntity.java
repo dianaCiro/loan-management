@@ -30,19 +30,19 @@ public class PaymentEntity {
     /**
      * Payment type.
      */
-    @Column
+    @Column(nullable = false)
     private String paymentType;
 
     /**
      * Payment date.
      */
-    @Column
+    @Column(nullable = false)
     private LocalDateTime date;
 
     /**
      * Payment amount.
      */
-    @Column
+    @Column(nullable = false)
     private double amount;
 
     /**
