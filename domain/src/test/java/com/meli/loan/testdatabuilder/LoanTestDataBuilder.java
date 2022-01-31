@@ -12,7 +12,7 @@ public class LoanTestDataBuilder {
 	private LocalDateTime date;
 
 	public LoanTestDataBuilder() {
-		this.amount = 1000.0;
+		this.amount = 2000.0;
 		this.term = 12;
 		this.rate = 0.05;
 		this.date = LocalDateTime.now();

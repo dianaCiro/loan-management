@@ -1,7 +1,7 @@
 package com.meli.loan.model;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @SuperBuilder
+@EqualsAndHashCode(callSuper=false)
 public class LoanFilter extends Pagination{
 
     /**

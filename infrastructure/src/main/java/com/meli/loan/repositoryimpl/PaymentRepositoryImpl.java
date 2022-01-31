@@ -7,6 +7,9 @@ import com.meli.loan.model.Payment;
 import com.meli.loan.repository.PaymentRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 /**
  * Is responsible for registering the payments in the database.
  */
@@ -44,5 +47,21 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 paymentMapperEntity.convertDomainToEntityObject(payment)
         );
         return paymentMapperEntity.convertEntityToDomainObject(paymentEntity);
+    }
+
+    /**
+     * Retrieves the total amount of payments made until the given date.
+     * @param loanId loan unique identifier.
+     * @param date to filter the payments made.
+     * @return the payment total amount made.
+     */
+    @Override
+    public double getSumPaymentsMade(String loanId, LocalDateTime date) {
+        Double sum = jpaPaymentRepository.getSumPaymentsMade(loanId, date);
+        if(Optional.ofNullable(sum).isPresent()) {
+            return sum.doubleValue();
+        } else {
+            return 0.0;
+        }
     }
 }

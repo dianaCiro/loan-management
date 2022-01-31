@@ -131,7 +131,16 @@ public class Loan {
 	}
 
 	/**
+	 * Calculates the total amount to be paid.
+	 * @return the amount to be paid;
+	 */
+	public double calculateTotalAmountToBePaid() {
+		return this.calculateMontlyAmount() * this.term;
+	}
+
+	/**
 	 * constructor used to build object in mapper.
 	 */
+	@SuppressWarnings("unused")
 	private Loan(){}
 }

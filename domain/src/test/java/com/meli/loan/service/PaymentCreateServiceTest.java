@@ -72,7 +72,7 @@ public class PaymentCreateServiceTest {
            fail();
        } catch (Exception e) {
            assertEquals(NotFoundException.class, e.getClass());
-           assertEquals(MessageFormat.format("The entered loan {0} does not exist", loanId), e.getMessage());
+           assertEquals(MessageFormat.format(PaymentCreateService.LOAN_NOT_EXISTING, loanId), e.getMessage());
        }
 
     }

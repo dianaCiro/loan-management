@@ -15,7 +15,7 @@ public interface LoanRepository {
 	 * Persists the loan object in database.
 	 * @param loan to save.
 	 */
-	public void create(Loan loan);
+	void create(Loan loan);
 
 	/**
 	 * Retrieves loans with pagination.
