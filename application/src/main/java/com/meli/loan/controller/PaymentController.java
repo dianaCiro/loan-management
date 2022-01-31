@@ -5,7 +5,6 @@ import com.meli.loan.model.CreatePaymentParams;
 import com.meli.loan.model.Payment;
 import com.meli.loan.response.PaymentResource;
 import com.meli.loan.service.PaymentCreateService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

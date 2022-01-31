@@ -22,7 +22,7 @@ allprojects {
 
     
     project.ext.springdata = ["org.springframework.boot:spring-boot-starter-data-jpa:2.6.3"]
-    
+
     project.ext.lombok = ["org.projectlombok:lombok:1.18.10"]
 	
 	project.ext.modelmapper = ['org.modelmapper:modelmapper:3.0.0']

@@ -2,14 +2,11 @@ package com.meli.loan.service;
 
 import com.meli.loan.model.CreateLoanParams;
 import com.meli.loan.model.Loan;
-import com.meli.loan.model.LoanFilter;
-import com.meli.loan.model.PagedLoan;
 import com.meli.loan.repository.LoanRepository;
 import com.meli.loan.testdatabuilder.CreateLoanParamsTestDataBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
-import org.springframework.data.domain.Page;
 
 import static org.junit.Assert.assertEquals;
 
