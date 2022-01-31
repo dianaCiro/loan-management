@@ -10,7 +10,7 @@ public class PaymentEntityTestDataBuilder {
 
     private Long id;
     private LoanEntity loan;
-    private PaymentType paymentType;
+    private String paymentType;
     private LocalDateTime date;
     private double amount;
 
@@ -20,7 +20,7 @@ public class PaymentEntityTestDataBuilder {
         loanEntityTestDataBuilder = new LoanEntityTestDataBuilder();
         id = 1l;
         loan = loanEntityTestDataBuilder.build();
-        paymentType = PaymentType.made;
+        paymentType = PaymentType.made.name();
         date = LocalDateTime.now();
         amount = 500;
     }

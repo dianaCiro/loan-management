@@ -7,12 +7,12 @@ import java.time.LocalDateTime;
 
 public class CreatePaymentParamsTestDataBuilder {
 
-    private PaymentType paymentType;
+    private String paymentType;
     private LocalDateTime date;
     private double amount;
 
     public CreatePaymentParamsTestDataBuilder() {
-        paymentType = PaymentType.made;
+        paymentType = PaymentType.made.name();
         date = LocalDateTime.now();
         amount = 500;
     }

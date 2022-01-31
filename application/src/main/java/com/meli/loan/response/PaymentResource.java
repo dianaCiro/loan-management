@@ -1,6 +1,5 @@
 package com.meli.loan.response;
 
-import com.meli.loan.enums.PaymentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,7 +29,7 @@ public class PaymentResource {
     /**
      * Payment type.
      */
-    private PaymentType paymentType;
+    private String paymentType;
 
     /**
      * Payment date.

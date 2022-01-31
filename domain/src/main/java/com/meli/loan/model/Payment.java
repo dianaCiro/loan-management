@@ -13,10 +13,10 @@ import java.util.Optional;
 @Getter
 public class Payment {
 
-    private static final String DATE_EXCEPTION_MESSAGE = "You must enter the payment date";
-    private static final String AMONT_EXCEPTION_MESSAGE = "The payment amount must be greater than 0";
-    private static final String LOAN_ID_EXCEPTION = "You must enter the loan to make the payment";
-    private static final String PAYMENT_TYPE_EXCEPTION = "You must enter the payment type";
+    public static final String DATE_EXCEPTION_MESSAGE = "You must enter the payment date";
+    public static final String AMONT_EXCEPTION_MESSAGE = "The payment amount must be greater than 0";
+    public static final String LOAN_ID_EXCEPTION = "You must enter the loan to make the payment";
+    public static final String PAYMENT_TYPE_INVALID = "PaymentType must be 'made' or 'missed'";
 
     /**
      * The payment unique identifier.
@@ -26,7 +26,7 @@ public class Payment {
     /**
      * Payment type.
      */
-    private PaymentType paymentType;
+    private String paymentType;
 
     /**
      * Loan unique identifier.
@@ -50,14 +50,14 @@ public class Payment {
      * @param amount
      * @param loanId
      */
-    public Payment(PaymentType paymentType, LocalDateTime date, double amount, String loanId) {
-        this.paymentType = paymentType;
+    public Payment(String paymentType, LocalDateTime date, double amount, String loanId) {
+        this.setPaymentType(paymentType);
         this.setDate(date);
         this.setAmount(amount);
         this.setLoanId(loanId);
     }
 
-    public Payment(Long id, PaymentType paymentType, String loanId, LocalDateTime date, double amount) {
+    public Payment(Long id, String paymentType, String loanId, LocalDateTime date, double amount) {
         this(paymentType, date, amount, loanId);
         this.id = id;
     }
@@ -78,11 +78,15 @@ public class Payment {
      * validates the paymentType before set the value.
      * @param paymentType
      */
-    public void setPaymentType(PaymentType paymentType) {
+    public void setPaymentType(String paymentType) {
         if (Optional.ofNullable(paymentType).isPresent()) {
-            this.paymentType = paymentType;
+            this.paymentType = PaymentType.getPaymentByName(paymentType)
+                .orElseThrow(() ->
+                    new BusinessException(PAYMENT_TYPE_INVALID)
+                )
+                .name();
         } else {
-            throw new BusinessException(PAYMENT_TYPE_EXCEPTION);
+            throw new BusinessException(PAYMENT_TYPE_INVALID);
         }
     }
 

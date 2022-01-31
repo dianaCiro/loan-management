@@ -7,16 +7,36 @@ import java.time.LocalDateTime;
 
 public class PaymentTestDataBuilder {
 
-    private PaymentType paymentType;
+    private String paymentType;
     private LocalDateTime date;
     private double amount;
     private String loanId;
 
     public PaymentTestDataBuilder() {
-        paymentType = PaymentType.made;
+        paymentType = PaymentType.made.name();
         date = LocalDateTime.now();
         amount = 500;
         loanId = "90e4dd94-e042-4d55-8473-7f8f27ca67";
+    }
+
+    public PaymentTestDataBuilder setAmount(double amount) {
+        this.amount = amount;
+        return this;
+    }
+
+    public PaymentTestDataBuilder setLoanId(String loanId) {
+        this.loanId = loanId;
+        return this;
+    }
+
+    public PaymentTestDataBuilder setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+        return this;
+    }
+
+    public PaymentTestDataBuilder setDate(LocalDateTime date) {
+        this.date = date;
+        return this;
     }
 
     public Payment build(){

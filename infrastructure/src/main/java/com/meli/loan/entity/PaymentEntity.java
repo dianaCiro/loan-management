@@ -1,6 +1,5 @@
 package com.meli.loan.entity;
 
-import com.meli.loan.enums.PaymentType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -32,8 +31,7 @@ public class PaymentEntity {
      * Payment type.
      */
     @Column
-    @Enumerated(EnumType.STRING)
-    private PaymentType paymentType;
+    private String paymentType;
 
     /**
      * Payment date.
@@ -55,7 +53,7 @@ public class PaymentEntity {
      * @param date
      * @param amount
      */
-    public PaymentEntity(Long id, String loanId, PaymentType paymentType, LocalDateTime date, double amount) {
+    public PaymentEntity(Long id, String loanId, String paymentType, LocalDateTime date, double amount) {
         this.id = id;
         this.loan = new LoanEntity(loanId);
         this.paymentType = paymentType;

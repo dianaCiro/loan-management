@@ -1,6 +1,5 @@
 package com.meli.loan.model;
 
-import com.meli.loan.enums.PaymentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +19,7 @@ public class CreatePaymentParams {
     /**
      * Payment type.
      */
-    private PaymentType paymentType;
+    private String paymentType;
 
     /**
      * Payment date.
