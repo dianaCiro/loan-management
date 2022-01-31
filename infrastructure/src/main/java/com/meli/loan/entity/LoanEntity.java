@@ -1,12 +1,10 @@
 package com.meli.loan.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +16,6 @@ import lombok.NoArgsConstructor;
  */
 @Entity(name = "loan")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class LoanEntity {
 	
@@ -51,4 +48,34 @@ public class LoanEntity {
 	 */
 	@Column
 	private LocalDateTime date;
+
+	/**
+	 * Loan payments.
+	 */
+	@OneToMany(mappedBy = "loan")
+	private List<PaymentEntity> payments;
+
+	/**
+	 * The loan entity constructor.
+	 * @param id
+	 * @param amount
+	 * @param term
+	 * @param rate
+	 * @param date
+	 */
+	public LoanEntity(String id, double amount, int term, double rate, LocalDateTime date) {
+		this.id = id;
+		this.amount = amount;
+		this.term = term;
+		this.rate = rate;
+		this.date = date;
+	}
+
+	/**
+	 * The constructor.
+	 * @param id
+	 */
+	public LoanEntity(String id) {
+		this.id = id;
+	}
 }

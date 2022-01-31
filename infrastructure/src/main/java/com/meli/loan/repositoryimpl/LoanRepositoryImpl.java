@@ -17,12 +17,11 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
  * Is responsible for registering the loans in the database.
- *
- * @author diana.ciro
  */
 @Repository
 public class LoanRepositoryImpl implements LoanRepository {
@@ -91,6 +90,22 @@ public class LoanRepositoryImpl implements LoanRepository {
         totalPages = mod == 0 ? totalPages : totalPages + 1;
 
         return new PagedLoan(loans, totalPages, totalElements);
+    }
+
+    /**
+     * Retrieves an optional.
+     * @param loanId to find the optional
+     * @return Optional<Loan> instance.
+     */
+    @Override
+    public Optional<Loan> findById(String loanId) {
+        Optional<LoanEntity> optionalLoanEntity = jpaLoanRepository.findById(loanId);
+
+        if(optionalLoanEntity.isPresent()){
+            return Optional.of(loanMapper.convertEntityToDomainObject(optionalLoanEntity.get()));
+        } else {
+            return Optional.empty();
+        }
     }
 
     /**

@@ -1,9 +1,9 @@
 package com.meli.loan.controller;
 
 import com.meli.loan.config.JacksonConfiguration;
-import com.meli.loan.exception.LoanExceptionHandler;
 import com.meli.loan.model.LoanFilter;
 import com.meli.loan.model.PagedLoan;
+import com.meli.loan.service.LoanRetrieveService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,13 +16,10 @@ import com.meli.loan.service.LoanCreateService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 /**
  * Endpoints to handle Loan requests.
- *
- * @author diana.ciro
  */
 @RestController
 @RequestMapping("/loan")
@@ -30,9 +27,14 @@ import java.time.LocalDateTime;
 public class LoanController {
 
     /**
-     * LoanService dependency.
+     * LoanCreateService dependency.
      */
     private LoanCreateService loanCreateService;
+
+    /**
+     *  LoanRetrieveService dependency.
+     */
+    private LoanRetrieveService loanRetrieveService;
 
     /**
      * LoanMapper dependency.
@@ -47,8 +49,9 @@ public class LoanController {
      * @param loanCreateService
      * @param loanMapper
      */
-    public LoanController(LoanCreateService loanCreateService, LoanMapper loanMapper) {
+    public LoanController(LoanCreateService loanCreateService, LoanRetrieveService loanRetrieveService, LoanMapper loanMapper) {
         this.loanCreateService = loanCreateService;
+        this.loanRetrieveService = loanRetrieveService;
         this.loanMapper = loanMapper;
     }
 
@@ -60,7 +63,7 @@ public class LoanController {
      */
     @PostMapping
     public ResponseEntity<LoanResource> createLoanApplication(@RequestBody CreateLoanParams createLoanParams) {
-        return ResponseEntity.ok(loanMapper.convertLoanToCreateLoanResponse(
+        return ResponseEntity.ok(loanMapper.convertLoanToLoanResource(
                 loanCreateService.create(createLoanParams)));
     }
 
@@ -91,6 +94,8 @@ public class LoanController {
                 .from(from).to(to).limit(Integer.parseInt(limit))
                 .sortColumn(sortColumn).page(Integer.parseInt(page))
                 .sortDirection(sortDirection).build();
-        return ResponseEntity.ok(loanCreateService.retrieveLoans(loanFilter));
+        return ResponseEntity.ok(loanRetrieveService.retrieveLoans(loanFilter));
     }
+
+
 }

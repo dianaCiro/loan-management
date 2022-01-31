@@ -42,14 +42,4 @@ public class LoanCreateServiceTest {
 
         assertEquals(loanArgumentCaptor.getValue(), loan);
     }
-
-    @Test
-    public void retrieveLoans() {
-        LoanFilter loanFilter = LoanFilter.builder().build();
-
-        loanCreateService.retrieveLoans(loanFilter);
-
-        Mockito.verify(loanRepository, Mockito.times(1)).retrieveLoans(loanFilter);
-
-    }
 }
