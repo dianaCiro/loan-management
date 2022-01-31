@@ -13,11 +13,6 @@ import com.meli.loan.testdatabuilder.LoanTestDataBuilder;
 
 public class LoanTest {
 
-	private static final String AMONT_EXCEPTION_MESSAGE = "The loan amount must be greater than 0";
-	private static final String TERM_EXCEPTION_MESSAGE = "The number of months it will take until the loan is paid off, must be greater than 0.";
-	private static final String RATE_EXCEPTION_MESSAGE = "The rate must not be less than 0";
-	private static final String DATE_EXCEPTION_MESSAGE = "You must enter the date when you applied for the loan";
-
 	private LoanTestDataBuilder loanTestDataBuilder;
 
 	@Before
@@ -32,7 +27,7 @@ public class LoanTest {
 			fail();
 		} catch (Exception e) {
 			assertEquals(BusinessException.class, e.getClass());
-			assertEquals(AMONT_EXCEPTION_MESSAGE, e.getMessage());
+			assertEquals(Loan.AMONT_EXCEPTION_MESSAGE, e.getMessage());
 		}
 	}
 
@@ -43,7 +38,7 @@ public class LoanTest {
 			fail();
 		} catch (Exception e) {
 			assertEquals(BusinessException.class, e.getClass());
-			assertEquals(TERM_EXCEPTION_MESSAGE, e.getMessage());
+			assertEquals(Loan.TERM_EXCEPTION_MESSAGE, e.getMessage());
 		}
 	}
 
@@ -54,7 +49,7 @@ public class LoanTest {
 			fail();
 		} catch (Exception e) {
 			assertEquals(BusinessException.class, e.getClass());
-			assertEquals(RATE_EXCEPTION_MESSAGE, e.getMessage());
+			assertEquals(Loan.RATE_EXCEPTION_MESSAGE, e.getMessage());
 		}
 	}
 
@@ -65,7 +60,7 @@ public class LoanTest {
 			fail();
 		} catch (Exception e) {
 			assertEquals(BusinessException.class, e.getClass());
-			assertEquals(DATE_EXCEPTION_MESSAGE, e.getMessage());
+			assertEquals(Loan.DATE_EXCEPTION_MESSAGE, e.getMessage());
 		}
 	}
 

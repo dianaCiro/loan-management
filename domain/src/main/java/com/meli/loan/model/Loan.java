@@ -10,17 +10,14 @@ import lombok.Getter;
 
 /**
  * This class contains the loan information.
- * 
- * @author diana.ciro
- *
  */
 @Getter
 public class Loan {
 	
-	private static final String AMONT_EXCEPTION_MESSAGE = "The loan amount must be greater than 0";
-	private static final String TERM_EXCEPTION_MESSAGE = "The number of months it will take until the loan is paid off, must be greater than 0.";
-	private static final String RATE_EXCEPTION_MESSAGE = "The rate must not be less than 0";
-	private static final String DATE_EXCEPTION_MESSAGE = "You must enter the date when you applied for the loan";
+	public static final String AMONT_EXCEPTION_MESSAGE = "The loan amount must be greater than 0";
+	public static final String TERM_EXCEPTION_MESSAGE = "The number of months it will take until the loan is paid off, must be greater than 0.";
+	public static final String RATE_EXCEPTION_MESSAGE = "The rate must not be less than 0";
+	public static final String DATE_EXCEPTION_MESSAGE = "You must enter the date when you applied for the loan";
 	
 	/**
 	 * Loan unique identifier.

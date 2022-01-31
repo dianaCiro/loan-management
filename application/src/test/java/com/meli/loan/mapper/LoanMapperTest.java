@@ -32,7 +32,7 @@ public class LoanMapperTest {
 	public void convertLoanToCreateLoanResponse() {
 		Loan loan = loanTestDataBuilder.build();
 		
-		LoanResource loanResource = loanMapper.convertLoanToCreateLoanResponse(loan);
+		LoanResource loanResource = loanMapper.convertLoanToLoanResource(loan);
 		
 		assertEquals(loan.getId(), loanResource.getLoanId());
 		assertEquals(loan.calculateMontlyAmount(), loanResource.getInstallment());

@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * Class to represent a loan resource.
- * @author diana.ciro
- *
  */
 @Builder
 @Data
