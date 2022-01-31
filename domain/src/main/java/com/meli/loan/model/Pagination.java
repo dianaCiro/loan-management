@@ -14,12 +14,12 @@ import javax.validation.constraints.NotNull;
 public class Pagination {
 
     /**
-     * Page to retrieve data.
+     * Page to retrieve data, zero based page index(0..N).
      */
     private int page;
 
     /**
-     * amount of data to retrieve per page.
+     * The size of the page to be returned.
      */
     private int limit;
 
