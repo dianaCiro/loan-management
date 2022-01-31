@@ -56,10 +56,10 @@ API rest for loan management:
 
 - Open command line
 - Download docker image
- >  docker pull XXXX/XXXX
+ >  docker pull dianaciro/loan-management
 
 - Run docker image
- > docker run -p 8081:8081 XXXX/XXXX
+ > docker run -p 8081:8081 dianaciro/loan-management
 - Using postman collection
 
 **Local**
@@ -208,3 +208,32 @@ status code : 200 OK
 }
 ```
 <br><br>
+
+**Check debt endpoint**
+
+**URL:** /api/loan/{id}/debt
+
+**METHOD:** GET
+
+**PARAMS:**
+
+>**id (path param) :** 
+>- *type:* string  
+>- *required:* true
+>- *description:* loan id (UUID)
+>- *example:* 58efb564-0928-4294-8ef6-e4eeb702fd89
+
+>**to (query param) :** 
+>- *type:* date, format "yyyy-MM-dd HH:mm'Z'" (ISO 8601) 
+>- *required:* false
+>- *description:* It indicates date to filter the loan payments.
+>- *example:* 2020-01-01 14:00Z
+
+**RESPONSE**
+
+```json
+status code : 200 OK
+{
+    "balance": 1754.52
+}
+```

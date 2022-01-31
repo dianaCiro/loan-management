@@ -1,0 +1,14 @@
+com.meli.loan
+com.meli.loan.config
+com.meli.loan.controller
+com.meli.loan.entity
+com.meli.loan.enums
+com.meli.loan.exception
+com.meli.loan.jpa
+com.meli.loan.mapper
+com.meli.loan.model
+com.meli.loan.repository
+com.meli.loan.repositoryimpl
+com.meli.loan.response
+com.meli.loan.service
+com.meli.loan.testdatabuilder
