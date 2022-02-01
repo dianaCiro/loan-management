@@ -73,7 +73,7 @@ API rest for loan management:
 
 **Postman**
 
-- Postman collection : https://url.com
+- [Postman collection](./Loan_application.postman_collection.json)
 
 <br><br>
 
