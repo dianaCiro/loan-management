@@ -1,0 +1,8 @@
+FROM openjdk:11
+
+RUN apt-get update && apt-get install -y tzdata
+ENV TZ America/Bogota
+
+COPY application/build/libs/application-0.0.1.jar /home/application-0.0.1.jar.jar
+
+CMD java -jar /home/application-0.0.1.jar.jar
