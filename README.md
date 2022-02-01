@@ -20,7 +20,8 @@ API rest for loan management:
 
 **Deployed with:**
 
-- Heroku
+- Heroku:
+  https://meli-loan.herokuapp.com
 
 <br>
 
@@ -73,7 +74,11 @@ API rest for loan management:
 
 **Postman**
 
-- Postman collection : https://url.com
+- [Postman collection](./Loan_application.postman_collection.json)
+<br>
+>**Variables**
+>- {{host}}: https://meli-loan.herokuapp.com o http://localhost:8081
+>- {{loanId}}: It could be taken from the endpoint create_loan_application  response.
 
 <br><br>
 
